@@ -1,0 +1,45 @@
+Type        Topic           MSG         Description
+==================================================================================
+switch      power           0/1         On/Off
+----------
+multi       modus           disco       random light effects on/off 
+multi       modus           picture     show_pictures
+multi       modus           solid       show text
+multi       modus           fade2       show text
+multi       modus           fade3       show text
+----------
+multi0      info            off         off
+multi0      info            time        Clock only
+multi0      info            date        Date
+multi0      info            datetime    Clock and Date
+multi0      info            text        Show predefined text
+----------------------------------------------------------------------------------
+color       textcolor       hex-input   text color
+----------
+text        print           input       set text to print
+----------
+multi1      layer           0           no layer visible
+multi1      layer           1           show layer 1 (background)
+multi1      layer           2           show layer 2 (text,clock,date...)
+multi1      layer           1_2         show layer 1 and layer 2
+----------------------------------------------------------------------------------
+switch      diashow         0/1         change pics automatically
+----------
+switch      control         next         next picture
+----------
+switch      control         prev         previous picture
+----------------------------------------------------------------------------------
+switch      rotatefront     0/1        text rotieren
+----------
+switch      rotateback      0/1         hintergrund rotieren
+----------
+switch      test            0/1         Test Switch
+----------------------------------------------------------------------------------
+color       bgcolor1        hex-input   background color
+----------
+color       bgcolor2        hex-input   background color
+----------
+color       bgcolor3        hex-input   background color
+----------------------------------------------------------------------------------
+
+=>>> Nicht implementiert: Ball wird rot, danach geht es dort weiter wo er aufgehört hat
