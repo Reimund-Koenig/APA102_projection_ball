@@ -12,8 +12,10 @@ strip = apa102.APA102(num_led=NUM_LED, global_brightness=20, mosi=10, sclk=11, o
 
 # Turn off all pixels (sometimes a few light up when the strip gets power)
 strip.clear_strip()
-
-strip.set_pixel_rgb(12, 0xFF0000)  # Red
+i=0
+while i<NUM_LED:
+    strip.set_pixel_rgb(i, 0xFF0000)  # Red
+    i+=1
 # Copy the buffer to the Strip (i.e. show the prepared pixels)
 strip.show()
 
