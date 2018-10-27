@@ -29,9 +29,7 @@ class HandleMQTTInput(threading.Thread):
             if globals.mqtt_topics["mode"] == "test":
                 i = 0
                 while i < NUM_LED:
-                    print("Hex value:"  + hex(int(globals.mqtt_topics["bgcolor1"][1:], 16)))
-                    strip.set_pixel_rgb(i, hex)  # Red
-                    #strip.set_pixel_rgb(i, 0xFF0000)  # Red
+                    strip.set_pixel_rgb(i, int(globals.mqtt_topics["bgcolor1"][1:], 16))
                     i += 1
                 # Copy the buffer to the Strip (i.e. show the prepared pixels)
                 strip.show()

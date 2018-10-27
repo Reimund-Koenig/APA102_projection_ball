@@ -8,6 +8,7 @@ log_levels = {
     "error":50
 }
 
+
 def log(lvl, message):
     # writeInFile = False
     enabledLogLevel = log_levels["debug"]
