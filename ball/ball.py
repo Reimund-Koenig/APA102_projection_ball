@@ -2,12 +2,32 @@
 import threading
 import paho.mqtt.client as mqtt
 
-
 MQTT_SERVER = "localhost"
 MQTT_PATH = "power"
 
+global continueRun
+global list_input
+
 continueRun = True
 list_input = []
+
+class MQTTConnector(threading.Thread):
+
+    def __init__(self, id, name):
+        threading.Thread.__init__(self)
+        self.threadID = id
+        self.name = name
+
+    # @staticmethod
+    def run(self):
+        global list_input
+        global continueRun
+        while continueRun:
+            mqttc = MyMQTTClass()
+            rc = mqttc.run()
+
+            print("rc: " + str(rc))
+
 class MyMQTTClass(mqtt.Client):
 
     def on_connect(self, mqttc, obj, flags, rc):
@@ -28,11 +48,14 @@ class MyMQTTClass(mqtt.Client):
 
     def run(self):
         self.connect(MQTT_SERVER, 1883, 60)
-
+        global continueRun
         rc = 0
-        while rc == 0:
+        while rc == 0 and continueRun:
             rc = self.loop()
         return rc
+
+
+
 
 class UserInput(threading.Thread):
 
@@ -48,7 +71,10 @@ class UserInput(threading.Thread):
         while continueRun:
             eingabe = input()
             if eingabe == "exit":
+                print("exit now")
                 continueRun = False
+            else:
+                print(eingabe)
             list_input.append(eingabe)
 
 
@@ -70,18 +96,17 @@ class HandleUserInput(threading.Thread):
 # Create new threads
 thread1 = UserInput(1, "Thread-1")
 thread2 = HandleUserInput(2, "Thread-2")
+thread3 = MQTTConnector(3,"MQTTConnector")
 
-mqttc = MyMQTTClass()
-rc = mqttc.run()
-
-print("rc: "+str(rc))
 
 # Start new Threads
 thread1.start()
 thread2.start()
+thread3.start()
 
 thread1.join()
 thread2.join()
+thread3.join()
 
 print("Exiting Main Thread")
 
