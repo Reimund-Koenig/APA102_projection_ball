@@ -2,12 +2,12 @@ Type        Topic           MSG         Description
 ==================================================================================
 switch      power           0/1         On/Off
 ----------
-multi       modus           line        calibration line
-multi       modus           disco       random light effects on/off 
-multi       modus           picture     show_pictures
-multi       modus           solid       show text
-multi       modus           fade2       show text
-multi       modus           fade3       show text
+multi       mode            line        calibration line
+multi       mode            disco       random light effects on/off 
+multi       mode            picture     show_pictures
+multi       mode            solid       show text
+multi       mode            fade2       show text
+multi       mode            fade3       show text
 ----------
 multi0      info            off         off
 multi0      info            time        Clock only

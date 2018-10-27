@@ -4,7 +4,7 @@ lock = Lock()
 global mqtt_topics
 mqtt_topics = {
     "power": "0",
-    "modus": "line",
+    "mode": "line",
     "info": "off",
     "textcolor": "#FFFFFF",
     "print": "",
@@ -12,6 +12,8 @@ mqtt_topics = {
     "diashow": "1",
     "control": "",
     "test": "0",
+    "rotatefront": "0",
+    "rotateback": "0",
     "bgcolor1": "#FFFFFF",
     "bgcolor2": "#FFFFFF",
     "bgcolor3": "#FFFFFF"

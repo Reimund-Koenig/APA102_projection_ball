@@ -9,7 +9,7 @@ log_levels = {
 
 def log(lvl, message):
     # writeInFile = False
-    enabledLogLevel = log_levels["info"]
+    enabledLogLevel = log_levels["debug"]
     if lvl < enabledLogLevel:
         return
     if lvl >= log_levels["error"]:
