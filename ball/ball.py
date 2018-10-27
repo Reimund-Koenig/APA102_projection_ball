@@ -3,33 +3,28 @@ import threading
 from logmouse import log
 from logmouse import log_levels as lvl
 
+
 class HandleMQTTInput(threading.Thread):
-    def __init__(self, id, name):
+    def __init__(self, id, name, strip):
         threading.Thread.__init__(self)
         self.threadID = id
         self.name = name
 
     # @staticmethod
     def run(self):
+        # Initialize the library and the strip
+
+
         while globals.continue_run:
             # if len(globals.list_input) > 0:
                 # print(globals.pop_threadsafe_list_input())
             if globals.mqtt_topics["test"] == "1":
                 log(lvl["debug"], "Exit by App")
                 globals.set_threadsafe_continue_run(False)
-            if globals.mqtt_topics["mode"] == "test":
-
-            else:
-
-        # .
-        # .
-        # .
-        # .
-        # .
-        # .
-        # .
-        # .
-        # .
+            #if globals.mqtt_topics["mode"] == "test":
+            #    print("test")
+            #else:
+            #    print("test2")
 
         # .
         # .
@@ -40,9 +35,19 @@ class HandleMQTTInput(threading.Thread):
         # .
         # .
         # .
+
         # .
         # .
-        # NUM_LED = 144
+        # .
+        # .
+        # .
+        # .
+        # .
+        # .
+        # .
+        # .
+        # .
+        #
         # filename = "pics/line.txt"
         # content = ""
         # pixel = 0
