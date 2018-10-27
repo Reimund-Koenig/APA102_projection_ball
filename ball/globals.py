@@ -17,9 +17,10 @@ mqtt_topics = {
     "bgcolor3": "#FFFFFF"
 }
 
-def set_threadsafe_packet_msg(topic, msg):
+def set_threadsafe_topic_msg(topic, msg):
     lock.acquire()
     mqtt_topics[topic] = msg
+    #log(lvl["debug"],"topic(" + topic + ") = " + msg)
     lock.release()
 
 global MQTT_SERVER
