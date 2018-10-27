@@ -1,8 +1,15 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Reimund">
     <words>
+      <w>bgcolor</w>
+      <w>diashow</w>
       <w>eingabe</w>
+      <w>modus</w>
+      <w>mqtt</w>
       <w>mqttc</w>
+      <w>textcolor</w>
+      <w>threadsafe</w>
+      <w>threadsave</w>
     </words>
   </dictionary>
 </component>

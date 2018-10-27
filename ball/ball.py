@@ -1,60 +1,7 @@
 #!/usr/bin/env python3
 import threading
-import paho.mqtt.client as mqtt
-
-MQTT_SERVER = "localhost"
-MQTT_PATH = "power"
-
-global continueRun
-global list_input
-
-continueRun = True
-list_input = []
-
-class MQTTConnector(threading.Thread):
-
-    def __init__(self, id, name):
-        threading.Thread.__init__(self)
-        self.threadID = id
-        self.name = name
-
-    # @staticmethod
-    def run(self):
-        global list_input
-        global continueRun
-        while continueRun:
-            mqttc = MyMQTTClass()
-            rc = mqttc.run()
-
-            print("rc: " + str(rc))
-
-class MyMQTTClass(mqtt.Client):
-
-    def on_connect(self, mqttc, obj, flags, rc):
-        self.subscribe(MQTT_PATH, 0)
-        print("rc: "+str(rc))
-
-    def on_message(self, mqttc, obj, msg):
-        print(msg.topic+" "+str(msg.qos)+" "+str(msg.payload))
-
-    def on_publish(self, mqttc, obj, mid):
-        print("mid: "+str(mid))
-
-    #def on_subscribe(self, mqttc, obj, mid, granted_qos):
-    #    print("Subscribed: "+str(mid)+" "+str(granted_qos))
-
-    #def on_log(self, mqttc, obj, level, string):
-    #    print(string)
-
-    def run(self):
-        self.connect(MQTT_SERVER, 1883, 60)
-        global continueRun
-        rc = 0
-        while rc == 0 and continueRun:
-            rc = self.loop()
-        return rc
-
-
+import globals
+from mqtt import Handler
 
 
 class UserInput(threading.Thread):
@@ -66,16 +13,15 @@ class UserInput(threading.Thread):
 
     # @staticmethod
     def run(self):
-        global list_input
-        global continueRun
-        while continueRun:
+        while globals.continue_run:
             eingabe = input()
             if eingabe == "exit":
                 print("exit now")
-                continueRun = False
+                globals.set_threadsafe_continue_run(False)
+            if eingabe == "p":
+                print("text to print: " + globals.mqtt_topics["print"])
             else:
-                print(eingabe)
-            list_input.append(eingabe)
+                globals.append_threadsafe_list_input(eingabe)
 
 
 class HandleUserInput(threading.Thread):
@@ -86,17 +32,15 @@ class HandleUserInput(threading.Thread):
 
     # @staticmethod
     def run(self):
-        global list_input
-        global continueRun
-        while continueRun:
-            if len(list_input) > 0:
-                print(list_input.pop())
+        while globals.continue_run:
+            if len(globals.list_input) > 0:
+                print(globals.pop_threadsafe_list_input())
 
 
 # Create new threads
 thread1 = UserInput(1, "Thread-1")
 thread2 = HandleUserInput(2, "Thread-2")
-thread3 = MQTTConnector(3,"MQTTConnector")
+thread3 = Handler(3,"MQTTConnector")
 
 
 # Start new Threads
