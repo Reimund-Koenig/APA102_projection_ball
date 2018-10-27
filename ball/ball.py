@@ -2,10 +2,12 @@ import globals
 import threading
 from logmouse import log
 from logmouse import log_levels as lvl
+from apa102_lib.driver import apa102
 
+NUM_LED = 144
 
 class HandleMQTTInput(threading.Thread):
-    def __init__(self, id, name, strip):
+    def __init__(self, id, name):
         threading.Thread.__init__(self)
         self.threadID = id
         self.name = name
@@ -13,7 +15,10 @@ class HandleMQTTInput(threading.Thread):
     # @staticmethod
     def run(self):
         # Initialize the library and the strip
+        strip = apa102.APA102(num_led=NUM_LED, global_brightness=20, mosi=10, sclk=11, order='rbg')
 
+        # Turn off all pixels (sometimes a few light up when the strip gets power)
+        strip.clear_strip()
 
         while globals.continue_run:
             # if len(globals.list_input) > 0:
@@ -21,10 +26,19 @@ class HandleMQTTInput(threading.Thread):
             if globals.mqtt_topics["test"] == "1":
                 log(lvl["debug"], "Exit by App")
                 globals.set_threadsafe_continue_run(False)
-            #if globals.mqtt_topics["mode"] == "test":
-            #    print("test")
-            #else:
-            #    print("test2")
+            if globals.mqtt_topics["mode"] == "test":
+                i = 0
+                while i < NUM_LED:
+                    print("Hex value:"  + hex(int(globals.mqtt_topics["bgcolor1"][1:], 16)))
+                    strip.set_pixel_rgb(i, hex)  # Red
+                    #strip.set_pixel_rgb(i, 0xFF0000)  # Red
+                    i += 1
+                # Copy the buffer to the Strip (i.e. show the prepared pixels)
+                strip.show()
+            else:
+                # Clear the strip and shut down
+                strip.clear_strip()
+        strip.cleanup()
 
         # .
         # .
