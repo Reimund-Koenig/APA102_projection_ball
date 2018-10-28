@@ -11,6 +11,11 @@ class HandleMQTTInput(threading.Thread):
 
     # @staticmethod
     def run(self):
+        # background matrix changed?
+
+        # front matix changed?
+
+
         # Initialize the library and the strip
         #strip = apa102.APA102(num_led=NUM_LED, global_brightness=20, mosi=10, sclk=11, order='rgb')
         i = 5
@@ -20,6 +25,19 @@ class HandleMQTTInput(threading.Thread):
         # while gc.get_run():
             # if len(globals.list_input) > 0:
 
+        # if len(globals.list_input) > 0:
+        # print(globals.pop_threadsafe_list_input())
+        if gc.get_msg("mode") == "solid":
+            log(lvl["debug"], "Activate bgcolor1: " + hex(gc.get_msg("bgcolor1")))
+            strip.clear_strip()
+            i = 0
+            while i < NUM_LED:
+                strip.set_pixel_rgb(i, gc.get_msg("bgcolor1"))
+                i += 1
+            strip.show()
+        else:
+            log(lvl["debug"], "Deactivate bgcolor1: " + hex(gc.get_msg("bgcolor1")))
+            strip.clear_strip()
 
 # .
 # .

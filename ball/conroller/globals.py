@@ -1,4 +1,4 @@
-from modell import globals as g
+from model import globals as g
 from threading import Lock
 
 MSG = 0
@@ -53,9 +53,14 @@ def pop_list_input():
     lock.release()
     return item
 
-def set_background_matrix(matrix):
+def set_background_matrix(filename):
+    with open(filename) as f:
+        content = f.readlines()
+    j = 0
     lock.acquire()
-    g.view_background_matrix = matrix
+    for i, line in enumerate(content):
+        g.view_front_matrix[i][j%77] = hex(int(line, 16))
+        j += 1
     lock.release()
 
 def set_front_matrix(matrix):

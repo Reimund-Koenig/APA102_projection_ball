@@ -1,46 +1,43 @@
-Type        Topic           MSG         Description
-==================================================================================
-switch      power           0/1         On/Off
+Type        Topic           MSG         Description                         layer            
+=================================================================================================================================
+switch      power           0/1         On/Off                              background                            
+----------                                      
+multi       mode            line        calibration line                    background
+multi       mode            disco       random light effects on/off         background
+multi       mode            picture     show_pictures                       background
+multi       mode            solid       one solid color                     background
+multi       mode            fade2       fading between two colors           background
+multi       mode            fade3       fading between three colors         background
 ----------
-multi       mode            line        calibration line
-multi       mode            disco       random light effects on/off 
-multi       mode            picture     show_pictures
-multi       mode            solid       show text
-multi       mode            fade2       show text
-multi       mode            fade3       show text
+multi0      info            time        Clock only                          front-text
+multi0      info            date        Date                                front-text
+multi0      info            datetime    Clock and Date                      front-text
+multi0      info            text        Show predefined text                front-text
+---------------------------------------------------------------------------------------------------------------------------------
+color       textcolor       hex-input   text color                          front-text-setting for text input
 ----------
-multi0      info            off         off
-multi0      info            time        Clock only
-multi0      info            date        Date
-multi0      info            datetime    Clock and Date
-multi0      info            text        Show predefined text
-----------------------------------------------------------------------------------
-color       textcolor       hex-input   text color
+text        print           input       set text to print                   front-text
 ----------
-text        print           input       set text to print
+multi1      layer           0           no layer visible                    choice between layers
+multi1      layer           1           show layer 1 (background)           choice between layers
+multi1      layer           2           show layer 2 (text,clock,date...)   choice between layers
+multi1      layer           3           show layer 1 and layer 2            choice between layers
+---------------------------------------------------------------------------------------------------------------------------------
+switch      diashow         0/1         change pics automatically           background-setting for show pictures
 ----------
-multi1      layer           0           no layer visible
-multi1      layer           1           show layer 1 (background)
-multi1      layer           2           show layer 2 (text,clock,date...)
-multi1      layer           1_2         show layer 1 and layer 2
-----------------------------------------------------------------------------------
-switch      diashow         0/1         change pics automatically
+switch      control         next         next picture                       background-setting
 ----------
-switch      control         next         next picture
+switch      control         prev         previous picture                   background
+---------------------------------------------------------------------------------------------------------------------------------
+switch      rotatefront     0/1        text rotieren                        front-text
 ----------
-switch      control         prev         previous picture
-----------------------------------------------------------------------------------
-switch      rotatefront     0/1        text rotieren
+switch      rotateback      0/1         hintergrund rotieren                background
 ----------
-switch      rotateback      0/1         hintergrund rotieren
+switch      test            0/1         Test Switch                         test stuff
+---------------------------------------------------------------------------------------------------------------------------------
+color       bgcolor1        hex-input   background color                    background
 ----------
-switch      test            0/1         Test Switch
-----------------------------------------------------------------------------------
-color       bgcolor1        hex-input   background color
+color       bgcolor2        hex-input   background color                    background
 ----------
-color       bgcolor2        hex-input   background color
-----------
-color       bgcolor3        hex-input   background color
-----------------------------------------------------------------------------------
-
-=>>> Nicht implementiert: Ball wird rot, danach geht es dort weiter wo er aufgehört hat
+color       bgcolor3        hex-input   background color                    background
+---------------------------------------------------------------------------------------------------------------------------------
