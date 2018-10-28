@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 import paho.mqtt.client as mqtt
-from logmouse import log
-from logmouse import log_levels as lvl
+from conroller.logmouse import log
+from conroller.logmouse import log_levels as lvl
 import threading
-import globals
+from conroller import globals as gc
+
+MQTT_SERVER = "localhost"
 
 class Handler(threading.Thread):
 
@@ -14,7 +16,7 @@ class Handler(threading.Thread):
 
     # @staticmethod
     def run(self):
-        while globals.continue_run:
+        while gc.get_run():
             mqttc = Connector()
             mqttc.run()
 
@@ -22,12 +24,12 @@ class Connector(mqtt.Client):
 
     def on_connect(self, mqttc, obj, flags, rc):
         log(lvl["info"], "on_connect")
-        for topic in globals.mqtt_topics:
+        for topic in gc.get_mqtt_topics():
             log(lvl["info"],"subscribe: " +  topic)
             self.subscribe(topic, 0)
 
     def on_message(self, mqttc, obj, msg):
-        globals.set_threadsafe_topic_msg(msg.topic, msg.payload.decode('ascii'))
+        gc.set_msg(msg.topic, msg.payload.decode('ascii'))
         log(lvl["debug"],"on_message: " + msg.topic + " = " + msg.payload.decode('ascii'))
 
     def on_publish(self, mqttc, obj, mid):
@@ -40,8 +42,8 @@ class Connector(mqtt.Client):
     #    log(lvl["debug"],string)
 
     def run(self):
-        self.connect(globals.MQTT_SERVER, 1883, 60)
+        self.connect(MQTT_SERVER, 1883, 60)
         rc = 0
-        while rc == 0 and globals.continue_run:
+        while rc == 0 and gc.get_run():
             rc = self.loop()
         return rc

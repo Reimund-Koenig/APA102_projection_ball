@@ -1,5 +1,4 @@
 global log_levels
-
 log_levels = {
     "debug":10,
     "info":20,
@@ -7,7 +6,6 @@ log_levels = {
     "critical":40,
     "error":50
 }
-
 
 def log(lvl, message):
     # writeInFile = False
