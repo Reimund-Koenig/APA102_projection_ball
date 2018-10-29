@@ -7,6 +7,11 @@ MSG = 0
 ON_MSG_FLAG = 1
 lock = Lock()
 
+def get_num_led():
+    return g.NUM_LED
+
+def get_end_led_front():
+    return g.END_LED_FRONT
 
 def get_run():
     return g.run

@@ -1,5 +1,8 @@
 import numpy as np
 
+END_LED_FRONT = 77
+NUM_LED = 144
+
 global run
 run = True
 

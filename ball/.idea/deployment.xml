@@ -5,7 +5,7 @@
       <paths name="ssh://pi@192.168.2.112:22/usr/bin/python3">
         <serverdata>
           <mappings>
-            <mapping deploy="/tmp/ball" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/pi/ball" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

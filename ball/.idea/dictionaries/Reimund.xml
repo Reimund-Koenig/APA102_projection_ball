@@ -2,8 +2,10 @@
   <dictionary name="Reimund">
     <words>
       <w>bgcolor</w>
+      <w>deltatime</w>
       <w>diashow</w>
       <w>eingabe</w>
+      <w>endtime</w>
       <w>fronttext</w>
       <w>modus</w>
       <w>mqtt</w>

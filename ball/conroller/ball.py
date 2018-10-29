@@ -1,12 +1,9 @@
 import threading
 from conroller.logmouse import log
 from conroller.logmouse import log_levels as lvl
-from apa102_lib.driver import apa102
 from conroller import globals as gc
 from conroller.background import bgController
 from conroller.fronttext import frontController
-
-NUM_LED = 77
 
 class Handler(threading.Thread):
     def __init__(self, id, name):
