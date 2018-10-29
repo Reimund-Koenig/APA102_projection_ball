@@ -9,8 +9,14 @@ list_input = []
 global view_background_matrix
 view_background_matrix =  np.zeros( (360, 77), dtype=np.int32 )
 
-global view_front_matrix
-view_front_matrix =  np.zeros( (360, 77), dtype=np.int32 )
+global view_background_change
+view_background_change = True
+
+global view_fronttext_matrix
+view_fronttext_matrix =  np.zeros( (360, 77), dtype=np.int32 )
+
+global view_fronttext_change
+view_fronttext_change = True
 
 global mqtt_topics
 # dictionary with msg, on_message

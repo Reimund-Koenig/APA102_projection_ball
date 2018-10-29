@@ -11,7 +11,6 @@ def create_matrix():
 
 
 ## from imageLoader
-
 #def __init__(self):
 def init(self):
     # load ball background file names (*.bb)

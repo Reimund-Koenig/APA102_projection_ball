@@ -4,6 +4,7 @@
       <w>bgcolor</w>
       <w>diashow</w>
       <w>eingabe</w>
+      <w>fronttext</w>
       <w>modus</w>
       <w>mqtt</w>
       <w>mqttc</w>

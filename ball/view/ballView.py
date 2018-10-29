@@ -1,9 +1,14 @@
 import threading
+from conroller.logmouse import log
+from conroller.logmouse import log_levels as lvl
+from apa102_lib.driver import apa102
+from conroller import globals as gc
 
-NUM_LED = 77
+END_LED_FRONT = 77
+NUM_LED = 144
 
 
-class HandleMQTTInput(threading.Thread):
+class Handler(threading.Thread):
     def __init__(self, id, name):
         threading.Thread.__init__(self)
         self.threadID = id
@@ -11,9 +16,52 @@ class HandleMQTTInput(threading.Thread):
 
     # @staticmethod
     def run(self):
-        # background matrix changed?
+        # Initialize the library and the strip
+        strip = apa102.APA102(num_led=NUM_LED, global_brightness=20, mosi=10, sclk=11, order='rgb')
 
-        # front matix changed?
+        # Turn off all pixels (sometimes a few light up when the strip gets power)
+        strip.clear_strip()
+        x = 0
+        while gc.get_run():
+            # some matrix changed?
+            if not (gc.background_changed() or gc.fronttext_changed()):
+                continue
+
+            strip.clear_strip()
+            # load fronttext into view
+            log(lvl["debug"], "load new fronttext matrix")
+            matrix = gc.get_fronttext_matrix()
+            idx = 0
+            y = 0
+            while idx < END_LED_FRONT:
+                strip.set_pixel_rgb(idx, int(matrix[x,y]))
+                y += 1
+                idx += 1
+
+            # load background into view
+            log(lvl["debug"], "load new background matrix")
+            matrix = gc.get_background_matrix()
+            y = 0
+            while idx < NUM_LED:
+                strip.set_pixel_rgb(idx, int(matrix[x,y]))
+                y += 1
+                idx += 1
+
+
+            strip.show()
+            # now sleep till 1/360° is reached >> See mind-plan below
+
+        # Clear the strip and shut down
+        strip.clear_strip()
+        strip.cleanup()
+        # front matrix changed?
+
+
+
+
+
+
+
 
 
         # Initialize the library and the strip
@@ -27,17 +75,7 @@ class HandleMQTTInput(threading.Thread):
 
         # if len(globals.list_input) > 0:
         # print(globals.pop_threadsafe_list_input())
-        if gc.get_msg("mode") == "solid":
-            log(lvl["debug"], "Activate bgcolor1: " + hex(gc.get_msg("bgcolor1")))
-            strip.clear_strip()
-            i = 0
-            while i < NUM_LED:
-                strip.set_pixel_rgb(i, gc.get_msg("bgcolor1"))
-                i += 1
-            strip.show()
-        else:
-            log(lvl["debug"], "Deactivate bgcolor1: " + hex(gc.get_msg("bgcolor1")))
-            strip.clear_strip()
+
 
 # .
 # .

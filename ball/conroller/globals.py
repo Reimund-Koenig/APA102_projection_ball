@@ -1,5 +1,7 @@
 from model import globals as g
 from threading import Lock
+from conroller.logmouse import log
+from conroller.logmouse import log_levels as lvl
 
 MSG = 0
 ON_MSG_FLAG = 1
@@ -53,7 +55,43 @@ def pop_list_input():
     lock.release()
     return item
 
-def set_background_matrix(filename):
+
+def fronttext_changed():
+    if not g.view_fronttext_change:
+        return False
+    lock.acquire()
+    g.view_fronttext_change = False
+    lock.release()
+    return True
+
+def get_fronttext_matrix():
+    return g.view_fronttext_matrix
+
+def set_fronttext_matrix(matrix):
+    lock.acquire()
+    g.view_fronttext_matrix = matrix
+    g.view_fronttext_change = True
+    lock.release()
+
+def background_changed():
+    if not g.view_background_change:
+        return False
+    lock.acquire()
+    g.view_background_change = False
+    lock.release()
+    return True
+
+def get_background_matrix():
+    return g.view_background_matrix
+
+def set_background_matrix(matrix):
+    log(lvl["debug"],"set background matrix")
+    lock.acquire()
+    g.view_background_matrix = matrix
+    g.view_background_change = True
+    lock.release()
+
+def set_image_to_background_matrix(filename):
     with open(filename) as f:
         content = f.readlines()
     j = 0
@@ -61,6 +99,7 @@ def set_background_matrix(filename):
     for i, line in enumerate(content):
         g.view_front_matrix[i][j%77] = hex(int(line, 16))
         j += 1
+    g.view_background_change = True
     lock.release()
 
 def set_front_matrix(matrix):

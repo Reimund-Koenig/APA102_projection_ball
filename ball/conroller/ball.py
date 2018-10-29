@@ -8,7 +8,7 @@ from conroller.fronttext import frontController
 
 NUM_LED = 77
 
-class HandleMQTTInput(threading.Thread):
+class Handler(threading.Thread):
     def __init__(self, id, name):
         threading.Thread.__init__(self)
         self.threadID = id
@@ -16,13 +16,6 @@ class HandleMQTTInput(threading.Thread):
 
     # @staticmethod
     def run(self):
-        # Initialize the library and the strip
-        strip = apa102.APA102(num_led=NUM_LED, global_brightness=20, mosi=10, sclk=11, order='rgb')
-
-
-        # Turn off all pixels (sometimes a few light up when the strip gets power)
-        strip.clear_strip()
-
         while gc.get_run():
 
             #################################################################################
@@ -65,6 +58,3 @@ class HandleMQTTInput(threading.Thread):
             # textcolor
             # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        # Clear the strip and shut down
-        strip.clear_strip()
-        strip.cleanup()
