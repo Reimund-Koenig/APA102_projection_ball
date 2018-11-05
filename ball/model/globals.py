@@ -1,7 +1,8 @@
 import numpy as np
 
-END_LED_FRONT = 77
+END_LED_BACKGROUND = 65
 NUM_LED = 144
+NUM_X_SEGMENTS = 4
 
 global run
 run = True
@@ -10,13 +11,13 @@ global list_input
 list_input = []
 
 global view_background_matrix
-view_background_matrix =  np.zeros( (360, 77), dtype=np.int32 )
+view_background_matrix =  np.zeros( (NUM_X_SEGMENTS, END_LED_BACKGROUND), dtype=np.int32 )
 
 global view_background_change
 view_background_change = True
 
 global view_fronttext_matrix
-view_fronttext_matrix =  np.zeros( (360, 77), dtype=np.int32 )
+view_fronttext_matrix =  np.zeros( (NUM_X_SEGMENTS, NUM_LED-END_LED_BACKGROUND), dtype=np.int32 )
 
 global view_fronttext_change
 view_fronttext_change = True

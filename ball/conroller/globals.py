@@ -10,8 +10,11 @@ lock = Lock()
 def get_num_led():
     return g.NUM_LED
 
-def get_end_led_front():
-    return g.END_LED_FRONT
+def get_num_x_segments():
+    return g.NUM_X_SEGMENTS
+
+def get_end_led_background():
+    return g.END_LED_BACKGROUND
 
 def get_run():
     return g.run

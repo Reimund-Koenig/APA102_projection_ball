@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="ssh://pi@192.168.2.112:22/usr/bin/python3" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" autoUpload="Always" serverName="ball" autoUploadExternalChanges="true">
     <serverData>
-      <paths name="ssh://pi@192.168.2.112:22/usr/bin/python3">
+      <paths name="ball">
         <serverdata>
           <mappings>
             <mapping deploy="/home/pi/ball" local="$PROJECT_DIR$" />
