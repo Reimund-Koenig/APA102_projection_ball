@@ -15,4 +15,14 @@ def create_matrix():
             matrix[1,y] = gc.get_msg("bgcolor1")
             y += 1
         gc.set_background_matrix(matrix)
+    if gc.on_msg("control"):
+        if gc.get_msg("control") == "next":
+            # next
+            gc.set_sleep_time(gc.get_sleep_time() + 0.0001)
+            log(lvl["debug"],"increase sleep time")
+
+        else:
+            # prev
+            gc.set_sleep_time(gc.get_sleep_time() - 0.0001)
+            log(lvl["debug"],"decrease sleep time")
     return

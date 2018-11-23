@@ -7,6 +7,12 @@ MSG = 0
 ON_MSG_FLAG = 1
 lock = Lock()
 
+def set_sleep_time(st):
+     g.sleep_time = st
+
+def get_sleep_time():
+    return g.sleep_time
+
 def get_num_led():
     return g.NUM_LED
 
@@ -76,6 +82,7 @@ def get_fronttext_matrix():
     return g.view_fronttext_matrix
 
 def set_fronttext_matrix(matrix):
+    log(lvl["debug"],"set front matrix")
     lock.acquire()
     g.view_fronttext_matrix = matrix
     g.view_fronttext_change = True
@@ -105,12 +112,7 @@ def set_image_to_background_matrix(filename):
     j = 0
     lock.acquire()
     for i, line in enumerate(content):
-        g.view_front_matrix[i][j%77] = hex(int(line, 16))
+        g.view_background_matrix[i][j%77] = hex(int(line, 16))
         j += 1
     g.view_background_change = True
-    lock.release()
-
-def set_front_matrix(matrix):
-    lock.acquire()
-    g.view_front_matrix = matrix
     lock.release()

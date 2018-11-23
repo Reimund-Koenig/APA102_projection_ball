@@ -15,6 +15,6 @@ def calculate_front_matrix():
     elif gc.get_msg("info") == "time":
         modeClock.create_matrix()
     elif gc.get_msg("info") == "datetime":
-        modeText.create_matrix()
-    elif gc.get_msg("info") == "text":
         modeClockDate.create_matrix()
+    elif gc.get_msg("info") == "text":
+        modeText.create_matrix()

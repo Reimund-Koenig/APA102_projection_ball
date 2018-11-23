@@ -7,6 +7,9 @@ NUM_X_SEGMENTS = 4
 global run
 run = True
 
+global sleep_time
+sleep_time = 0.006
+
 global list_input
 list_input = []
 

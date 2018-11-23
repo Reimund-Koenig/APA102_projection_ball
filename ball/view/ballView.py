@@ -29,10 +29,10 @@ class Handler(threading.Thread):
         log(lvl["debug"], "Wait for: " + str(seconds_per_step) + "  seconds")
 
         x = 0
-        SLEEP_TIME = 0.0059
         NS_TO_SECONDS = 1000*1000*1000
         while gc.get_run():
             starttime = time.time_ns()
+            sleep_time_ns = gc.get_sleep_time()
             if gc.background_changed():
                 background_matrix = gc.get_background_matrix()
 
@@ -62,7 +62,7 @@ class Handler(threading.Thread):
                 x = 0
             #time_4 = time.time_ns() - starttime
             #print("x: " + str(x) + " - complete: " + str(time_1+time_2+time_3+time_4) + " - time_1: " + str(time_1) + "  - time_2: " + str(time_2) + "  - time_3: " + str(time_3) + "  - time_4: " + str(time_4))
-            time.sleep(SLEEP_TIME-((starttime-time.time_ns())/NS_TO_SECONDS));
+            time.sleep(sleep_time_ns - ((starttime-time.time_ns())/NS_TO_SECONDS));
         # Clear the strip and shut down
         strip.clear_strip()
         strip.cleanup()
