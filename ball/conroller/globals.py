@@ -8,7 +8,9 @@ ON_MSG_FLAG = 1
 lock = Lock()
 
 def set_sleep_time(st):
-     g.sleep_time = st
+    lock.acquire()
+    g.sleep_time = st
+    lock.release()
 
 def get_sleep_time():
     return g.sleep_time

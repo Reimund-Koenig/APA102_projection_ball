@@ -2,11 +2,11 @@
 from conroller.logmouse import log
 from conroller.logmouse import log_levels as lvl
 from conroller import mqtt
-from conroller import ball
+from conroller import ballController
 from view import ballView
 
 # Create new threads
-thread_ball_controller = ball.Handler(1, "BallController")
+thread_ball_controller = ballController.Handler(1, "BallController")
 thread_ball_view = ballView.Handler(2, "BallView")
 thread_mqtt = mqtt.Handler(3,"MQTTConnector")
 

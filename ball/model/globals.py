@@ -2,7 +2,7 @@ import numpy as np
 
 END_LED_BACKGROUND = 65
 NUM_LED = 144
-NUM_X_SEGMENTS = 4
+NUM_X_SEGMENTS = 36
 
 global run
 run = True

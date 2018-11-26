@@ -25,6 +25,15 @@ class Handler(threading.Thread):
         turn = False
         steps_per_turn = gc.get_num_x_segments()
         while gc.get_run():
+
+            #################################################################################
+            #
+            # test stuff
+            #
+            #################################################################################
+            if gc.get_msg("test") == 1:
+                log(lvl["debug"], "Exit by App")
+                gc.set_run(False)
             ####################################################################
             #  frequency
             t0 = time.time_ns()
