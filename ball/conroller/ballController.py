@@ -4,6 +4,8 @@ from conroller.logmouse import log_levels as lvl
 from conroller import globals as gc
 import time
 import RPi.GPIO as GPIO
+from conroller.background import bgController
+from conroller.fronttext import frontController
 
 NS_TO_SECONDS = 1000*1000*1000
 NS_DELAY_TIME = (1000 * 1000 * 10)
@@ -34,6 +36,26 @@ class Handler(threading.Thread):
             if gc.get_msg("test") == 1:
                 log(lvl["debug"], "Exit by App")
                 gc.set_run(False)
+
+            #################################################################################
+            #
+            # MQTT Control
+            #
+            #################################################################################
+
+            if gc.get_msg("layer") == 0:
+                # is the message new?
+                if gc.on_msg("layer"):
+                    log(lvl["debug"], "Deactivate Stripe")
+                    strip.clear_strip()
+                continue
+            else:
+                if gc.get_msg("layer") == 1 or gc.get_msg("layer") == 3:
+                    #   background handling
+                    bgController.calculate_background_matrix()
+                if gc.get_msg("layer") == 2 or gc.get_msg("layer") == 3:
+                    # front handling
+                    frontController.calculate_front_matrix()
             ####################################################################
             #  frequency
             t0 = time.time_ns()
