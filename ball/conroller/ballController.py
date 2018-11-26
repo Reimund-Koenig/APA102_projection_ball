@@ -56,8 +56,13 @@ class Handler(threading.Thread):
                 if gc.get_msg("layer") == 2 or gc.get_msg("layer") == 3:
                     # front handling
                     frontController.calculate_front_matrix()
-            ####################################################################
+                    
+            #################################################################################
+            #
             #  frequency
+            #
+            #################################################################################
+
             t0 = time.time_ns()
             if t0 > t1:
                 if not hz == 0:
